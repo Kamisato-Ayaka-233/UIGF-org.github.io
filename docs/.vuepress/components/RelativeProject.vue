@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CSSProperties, ref } from "vue";
+import { ref } from "vue";
 
 enum ThirdpartyType {
   github,
@@ -39,10 +39,6 @@ const titles: Record<Thirdparty, string> = {
   other: "第三方站点",
 };
 
-const containerStyle = ref<CSSProperties>({
-  backgroundImage: `url("${props.preview}")`,
-});
-
 const hoverAreaElm = ref<HTMLElement>();
 
 function toOuter(url: string) {
@@ -52,10 +48,21 @@ function toOuter(url: string) {
 function brokenImage(ev: Event) {
   (<HTMLImageElement>ev.currentTarget).style.display = "none";
 }
+
+function getLogo(logo: string): string {
+  const root = window.location.origin;
+  if (logo.startsWith("/")) {
+    return `${root}${logo}`;
+  } else {
+    return logo;
+  }
+}
 </script>
 
 <template>
-  <div class="partnership-project" :style="containerStyle">
+  <div class="partnership-project" :style="{
+    backgroundImage: `url('${props.preview}')`,
+  }">
     <div
       class="content"
       ref="hoverAreaElm"
@@ -70,7 +77,7 @@ function brokenImage(ev: Event) {
         <img
           class="icon"
           :alt="props.name"
-          :src="props.logo"
+          :src="getLogo(props.logo)"
           v-if="props.logo"
           @error="brokenImage"
         />
@@ -85,7 +92,7 @@ function brokenImage(ev: Event) {
         <img
           class="icon"
           :alt="props.name"
-          :src="props.logo"
+          :src="getLogo(props.logo)"
           v-if="props.logo"
           @error="brokenImage"
         />
