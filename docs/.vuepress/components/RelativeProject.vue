@@ -208,13 +208,24 @@ $main-lt-size: 1.5em;
     cursor: pointer;
 
     &:hover[transparent="true"] {
-      .blocker,
+      .blocker {
+        opacity: 0;
+      }
+
       .main-center {
         opacity: 0;
+
+        img {
+          pointer-events: none;
+        }
       }
 
       .main-lt {
         opacity: 1;
+
+        img {
+          pointer-events: none;
+        }
       }
     }
 
