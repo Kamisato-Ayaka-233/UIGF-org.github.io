@@ -173,6 +173,7 @@ $main-lt-size: 1.5em;
           border-radius: 50%;
           overflow: hidden;
           display: flex;
+          text-decoration: none;
           justify-content: center;
           align-items: center;
           background-color: white;
